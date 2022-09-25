@@ -42,25 +42,4 @@ class Wigman_AjaxSwatches_Block_Catalog_Product_View_Type_Configurable extends W
 
         $this->_optionLabels = $optionLabels;
     }
-
-    // Implement sorting of labels inside validate because its cool
-    protected function _validateAttributeInfo(&$info)
-    {
-        $ret = parent::_validateAttributeInfo($info);
-        // Dont loose time if not vaid
-        if($ret){
-
-            // traverse info and append sort
-            foreach($info['options'] as &$option){
-                $option['sort_id'] = $this->_optionLabels[$option['id']][0]['sort_id'];
-                $test ='';
-            }
-            //Wigman: then finally we sort the attribute options array by sort_id
-            usort($info['options'], function ($a, $b) {
-                return $a['sort_id'] - $b['sort_id'];
-            });
-
-        }
-        return $ret;
-    }
 }
