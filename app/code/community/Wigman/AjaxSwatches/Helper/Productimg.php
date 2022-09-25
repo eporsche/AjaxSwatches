@@ -150,7 +150,7 @@ class Wigman_AjaxSwatches_Helper_Productimg extends Mage_ConfigurableSwatches_He
         }
 
         if (!isset($this->_productImageFilters[$product->getId()])) {
-            $mapping = call_user_func_array("array_merge_recursive", $product->getChildAttributeLabelMapping());
+            $mapping = call_user_func_array("array_merge_recursive", array_values($product->getChildAttributeLabelMapping()));
 
             /* Wigman: this goes out: */
             //$filters = array_unique($mapping['labels']);
@@ -158,7 +158,7 @@ class Wigman_AjaxSwatches_Helper_Productimg extends Mage_ConfigurableSwatches_He
             /* Wigman: and this comes in (that's because we changed the labels object to include sort_ids) */
             $filters = array();
             foreach($mapping['labels'] as $index => $label){
-                $filters[$index] = $label['label'];
+                $filters[$index] = $label;
             }
 
             $filters = array_unique($filters);
